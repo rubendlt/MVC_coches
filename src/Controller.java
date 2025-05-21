@@ -1,27 +1,36 @@
-import java.lang.module.ModuleDescriptor;
+/**
+ * Clase controlador que conecta la vista con el modelo.
+ */
+public class Controlador {
+    private Modelo modelo;
 
-public class Controller {
-    public static void main(String[] args) {
-        // Instanciamos la vista y el modelo
-        View miView = new View();
-        Model miModel = new Model();
+    public Controlador(Modelo modelo) {
+        this.modelo = modelo;
+    }
 
-        // Crear tres coches
-        miModel.crearCoche("LaFerrari", "SBC 1234");
-        miModel.crearCoche("Alpine", "HYU 4567");
-        miModel.crearCoche("Aston Martin", "FGH 3333");
+    public void crearCoche(String marca, String modelo) {
+        Coche coche = new Coche(marca, modelo);
+        this.modelo.añadirCoche(coche);
+    }
 
-        Coche ferrari = miModel.getCoche("SBC 1234");
-        // modifica la velocidad
-        int nuevaVelocidad = miModel.cambiarVelocidad("SBC 1234", 30);
+    public void aumentarVelocidad(int index) {
+        Coche coche = modelo.obtenerCoche(index);
+        if (coche != null) {
+            coche.aumentarVelocidad();
+        }
+    }
 
-        // recoje la velocidad y la muestra (tarea de la View)
-        boolean hecho = miView.muestraVelocidad("SBC 1234", miModel.getVelocidad("SBC 1234"));
+    public void disminuirVelocidad(int index) {
+        Coche coche = modelo.obtenerCoche(index);
+        if (coche != null) {
+            coche.disminuirVelocidad();
+        }
+    }
 
-        if (hecho) {
-            System.out.println("Correcto");
-        } else {
-            System.out.println("Error");
-        } ;
+    public void mostrarCoches() {
+        int i = 0;
+        for (Coche coche : modelo.obtenerCoches()) {
+            System.out.println("[" + i++ + "] " + coche);
+        }
     }
 }
