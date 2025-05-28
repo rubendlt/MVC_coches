@@ -1,5 +1,48 @@
 # Examen
 
+## Cambios Introducidos en el Código
+
+Para implementar las funcionalidades "Avanzar (metros)" y "Poner gasolina (litros)", se realizaron los siguientes cambios en las clases del proyecto:
+
+### `Coche.java`
+- Se añadió el atributo:
+    - `double gasolina`: representa los litros de gasolina disponibles (inicializado a 10.0 litros).
+
+- Se implementó el método:
+    - `void avanzar(int metros)`  
+      Calcula el consumo de gasolina en función de la velocidad actual y la distancia recorrida.
+     
+      Imprime el nivel de gasolina tras avanzar.
+
+- Se implementó el método:
+    - `void ponerGasolina(double litros)`  
+      Suma los litros indicados al atributo `gasolina` e imprime el nuevo nivel.
+
+---
+
+### 📄 `Model.java`
+- Se añadieron los métodos:
+    - `void avanzarCoche(String matricula, int metros)`  
+      Llama al método `avanzar()` del coche correspondiente.
+    - `void repostarCoche(String matricula, double litros)`  
+      Llama al método `ponerGasolina()` del coche correspondiente.
+
+---
+
+### 📄`Controller.java`
+- Se añadieron llamadas a las nuevas funcionalidades:
+    - `model.avanzarCoche(matricula, metros);`
+    - `model.repostarCoche(matricula, litros);`
+
+---
+
+###  `View.java`
+- Se pueden añadir métodos para mostrar el nivel de gasolina u opciones al usuario, aunque no es imprescindible para el funcionamiento.
+
+---
+
+Estos cambios permiten simular con mayor realismo el comportamiento de los coches al moverse y consumir gasolina, así como permitir al usuario recargar el depósito.
+
 
 # Arquitectura MVC
 
