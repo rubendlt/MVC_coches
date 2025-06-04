@@ -1,5 +1,48 @@
 # Examen observer
+Alarma de Repostaje
 
+## Implementación
+
+- `Coche` actúa como **Observable**.
+- `AlarmaGasolina` actúa como **Observer**.
+- Cada vez que se avanza o se reposta, el coche notifica a los observadores su nuevo nivel de gasolina.
+- La alarma comprueba si hay que lanzar el mensaje de alerta.
+
+## Archivos Nuevos
+
+Observer.java`: interfaz del patrón Observer.
+Observable.java`: interfaz del patrón Observable.
+AlarmaGasolina.java`: implementación concreta de la alarma.
+
+## Cambios realizados
+
+- `Coche` ahora implementa `Observable` y notifica a sus observadores cuando cambia la gasolina.
+- `ControladorCoche` agrega una instancia de `AlarmaGasolina` como observador.
+
+## Uso
+
+Simplemente usa la aplicación como antes. Si avanzas lo suficiente como para que la gasolina sea inferior a 10 litros, se imprimirá:
+
+```
+Alerta: Repostar
+```
+
+```mermaid
+sequenceDiagram
+    participant Usuario
+    participant Vista
+    participant Controlador
+    participant Coche
+    participant Alarma
+
+    Usuario->>Vista: Pulsar avanzar
+    Vista->>Controlador: avanzar(metros)
+    Controlador->>Coche: avanzar(metros)
+    Coche->>Coche: reducir gasolina
+    Coche->>Coche: notifyObservers()
+    Coche->>Alarma: update(gasolina)
+    Alarma->>Alarma: mostrar alerta si < 10L
+```
 ## Cambios Introducidos en el Código
 
 Para implementar las funcionalidades "Avanzar (metros)" y "Poner gasolina (litros)", se realizaron los siguientes cambios en las clases del proyecto:
@@ -20,7 +63,7 @@ Para implementar las funcionalidades "Avanzar (metros)" y "Poner gasolina (litro
 
 ---
 
-### 📄 `Model.java`
+###  `Model.java`
 - Se añadieron los métodos:
     - `void avanzarCoche(String matricula, int metros)`  
       Llama al método `avanzar()` del coche correspondiente.
@@ -29,7 +72,7 @@ Para implementar las funcionalidades "Avanzar (metros)" y "Poner gasolina (litro
 
 ---
 
-### 📄`Controller.java`
+### `Controller.java`
 - Se añadieron llamadas a las nuevas funcionalidades:
     - `model.avanzarCoche(matricula, metros);`
     - `model.repostarCoche(matricula, litros);`
